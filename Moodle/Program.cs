@@ -20,12 +20,12 @@ namespace Moodle
 
             if (hero.Health == 0)
             {
-                Console.WriteLine(boss.Name + " vant.");
+                Console.WriteLine($"{boss.Name} vant.");
             }
             
             if (boss.Health == 0)
             {
-                Console.WriteLine(hero.Name + " vant.");
+                Console.WriteLine($"{hero.Name} vant.");
             }
         }
 

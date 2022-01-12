@@ -31,7 +31,7 @@ namespace Moodle
             if (Stamina == 0)
             {
                 Recharge();
-                Console.WriteLine(Name + " har ikke nok stamina. Bruker 'recharge'.");
+                Console.WriteLine($"{Name} har ikke nok stamina. Bruker 'recharge'.");
             }
             else
             {
@@ -44,17 +44,17 @@ namespace Moodle
                     var max = Convert.ToInt32(strengthParts[1]) + 1;
                     newStrength = random.Next(min, max);
                     player2.Health -= newStrength;
-                    Console.WriteLine(Name + " tok " + newStrength + " skade fra " + player2.Name + ".");
+                    Console.WriteLine($"{Name} tok {newStrength} skade fra {player2.Name}");
                 }
                 else
                 {
                     newStrength = Convert.ToInt32(Strength);
                     player2.Health -= newStrength;
-                    Console.WriteLine(Name + " tok " + newStrength + " skade fra " + player2.Name + ".");
+                    Console.WriteLine($"{Name} tok {newStrength} skade fra {player2.Name}");
                 }
                 Stamina -= 10;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(player2.Name + " har " + player2.Health + "HP igjen.");
+                Console.WriteLine($"{player2.Name} har {player2.Health} HP igjen.");
             }
 
             await Task.Delay(1000);
@@ -63,7 +63,7 @@ namespace Moodle
         public void Recharge()
         {
             Stamina = MaxStamina;
-            Console.WriteLine(Name + " fikk " + MaxStamina);
+            Console.WriteLine($"{Name} fikk {MaxStamina}");
         }
     }
 }
