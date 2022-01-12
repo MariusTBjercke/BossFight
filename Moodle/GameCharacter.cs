@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Moodle
@@ -14,14 +11,16 @@ namespace Moodle
         public string Strength { get; set; }
         public int Stamina { get; set; }
         public int MaxStamina { get; set; }
+        public bool Alive { get; set; }
 
-        public GameCharacter(string name, int health, string strength, int stamina)
+        public GameCharacter(string name, int health, string strength, int stamina, bool alive = true)
         {
             Name = name;
             Health = health;
             Strength = strength;
             Stamina = stamina;
             MaxStamina = stamina;
+            Alive = alive;
         }
 
         public async Task Fight(GameCharacter player2)
@@ -31,39 +30,43 @@ namespace Moodle
             if (Stamina == 0)
             {
                 Recharge();
-                Console.WriteLine($"{Name} har ikke nok stamina. Bruker 'recharge'.");
             }
             else
             {
-                int newStrength;
+                int finalStrength;
                 Console.ForegroundColor = ConsoleColor.Red;
                 if (Strength.Contains('-'))
                 {
                     var strengthParts = Strength.Split('-');
                     var min = Convert.ToInt32(strengthParts[0]);
                     var max = Convert.ToInt32(strengthParts[1]) + 1;
-                    newStrength = random.Next(min, max);
-                    player2.Health -= newStrength;
-                    Console.WriteLine($"{Name} tok {newStrength} skade fra {player2.Name}");
+                    finalStrength = random.Next(min, max);
+                    player2.Health -= finalStrength;
+                    Console.WriteLine($"{Name} tok {finalStrength} skade fra {player2.Name}");
                 }
                 else
                 {
-                    newStrength = Convert.ToInt32(Strength);
-                    player2.Health -= newStrength;
-                    Console.WriteLine($"{Name} tok {newStrength} skade fra {player2.Name}");
+                    finalStrength = Convert.ToInt32(Strength);
+                    player2.Health -= finalStrength;
+                    Console.WriteLine($"{Name} tok {finalStrength} skade fra {player2.Name}");
                 }
                 Stamina -= 10;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine($"{player2.Name} har {player2.Health} HP igjen.");
+                if (player2.Health > 0) Console.WriteLine($"{player2.Name} har {player2.Health} HP igjen.");
+                // Added this for later use
+                else player2.Alive = false;
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(800);
         }
 
         public void Recharge()
         {
             Stamina = MaxStamina;
-            Console.WriteLine($"{Name} fikk {MaxStamina}");
+            Console.WriteLine($"{Name} har ikke nok stamina. Bruker 'Recharge'.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{Name} fikk tilbake {MaxStamina} stamina.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

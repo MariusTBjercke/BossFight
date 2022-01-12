@@ -1,33 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace Moodle
 {
     class Program
     {
-
-        static GameCharacter hero = new GameCharacter("Arthas", 100, "20", 40);
-        static GameCharacter boss = new GameCharacter("Urug", 400, "0-30", 10);
+        private static List<GameCharacter> players = new List<GameCharacter>();
+        static Random rnd = new Random();
 
         static async Task Main(string[] args)
         {
-            while (hero.Health > 0 && boss.Health > 0)
+            int first = rnd.Next(0, 2);
+            int last = first == 0 ? 1 : 0;
+
+            // Players (Two player support only)
+            players.Add(new GameCharacter("Arthas", 100, "20", 40));
+            players.Add(new GameCharacter("Urug", 400, "0-30", 10));
+
+            while (players[0].Health > 0 && players[1].Health > 0)
             {
-                await hero.Fight(boss);
-                await boss.Fight(hero);
+                await players[first].Fight(players[last]);
+                await players[last].Fight(players[first]);
             }
 
-            if (hero.Health == 0)
-            {
-                Console.WriteLine($"{boss.Name} vant.");
-            }
-            
-            if (boss.Health == 0)
-            {
-                Console.WriteLine($"{hero.Name} vant.");
-            }
+            CheckForWinner();
         }
 
+        private static void CheckForWinner()
+        {
+            var alive = players.FindIndex(p => p.Alive);
+            var dead = players.FindIndex(p => !p.Alive);
+            Console.WriteLine($"{players[dead].Name} døde :(");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"{players[alive].Name} vant!");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
     }
 }
