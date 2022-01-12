@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moodle", "Moodle\Moodle.csproj", "{2EDE3D5F-E762-42A9-9AA1-D1F364B5E504}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EDE3D5F-E762-42A9-9AA1-D1F364B5E504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EDE3D5F-E762-42A9-9AA1-D1F364B5E504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EDE3D5F-E762-42A9-9AA1-D1F364B5E504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EDE3D5F-E762-42A9-9AA1-D1F364B5E504}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D079BD96-1D8E-4DA5-B593-3AAB9B3C4FC4}
+	EndGlobalSection
+EndGlobal
